@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body_title %}Lista över medlemmar {{ settings.BUSINESS_YEAR }}{% endblock %}
+
+{% block base_body %}
+<p>
+<table class="small-6 small-centered columns">
+  <thead>
+    <tr>
+     <th>Nr</th>
+     <th>Namn</th>
+     <th>Styrelseposition</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for member in member_list %}
+    <tr>
+      <td>{{ member.id }}</td>
+      <td>{{ member }}</td>
+      <td>{% if member.boardmember_set.all.0.title %} {{ member.boardmember_set.all.0.title }}{% else %}-{% endif %}</td>
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+{% endblock base_body %}

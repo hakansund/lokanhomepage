@@ -1,0 +1,130 @@
+{% load static %}
+{% load foundation_tags %}
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block meta %}{% endblock meta %}
+    {% block base_title %}
+    <title>{% block title %}Lokan homepage{% endblock title %}</title>
+    {% endblock base_title %}
+
+    {# Base Foundation CSS #}
+    {% block foundation_css %}
+    {% foundation_css "normalize" %}
+    {% foundation_css "foundation.min" %}
+    {% endblock foundation_css %}
+
+    {# Custom CSS #}
+    {% block css %}{% endblock css %}
+
+    {# Override if you need another version of modernizr #}
+    {% block foundation_modernizer %}
+    {% foundation_vendor "modernizr" %}
+    {% endblock foundation_modernizer %}
+
+    {# Custom head JS #}
+    {% block head_js %}{% endblock head_js %}
+    </head>
+    <body {% block body_attr %}{% endblock body_attr %}>
+
+    {# Top menu #}
+    <nav class="top-bar" data-topbar>
+
+    <ul class="title-area">
+     <li class="name"><h1><a href="{% url 'index' %}">Lokans hemsida</a></h1></li>
+     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+
+    <section class="top-bar-section">
+
+    <ul class="left">
+     <li class="divider"></li>
+     <li class="has-dropdown">
+      <a href="">Medlemmar</a>
+       <ul class="dropdown">
+         <li><a href="{% url 'members:index' %}">Bli medlem</a></li>
+	<li><a href="{% url 'members:list' %}">Medlemslista</a></li>
+       </ul>
+     </li>
+     <li class="divider"></li>
+    </ul>
+
+    <ul class="left">
+     <li class="has-dropdown">
+      <a href="">Aktiviteter</a>
+       <ul class="dropdown">
+        <li><a href="{% url 'activities:upcominglist' %}">Kommande aktiviteter</a></li>
+        <li><a href="{% url 'activities:oldlist' %}">Gamla aktiviteter</a></li>
+        <li><a href="{% url 'activities:add' %}">Skapa aktivitet</a></li>
+       </ul>
+     </li>
+     <li class="divider"></li>
+    </ul>
+
+    <ul class="left">
+     <li class="has-dropdown">
+      <a href="">Projektbidrag</a>
+       <ul class="dropdown">
+	<li><a href="{% url 'funding:list' %}">Visa ansökningar</a></li>
+        <li><a href="{% url 'funding:add' %}">Sök projektsbidrag</a></li>
+       </ul>
+     </li>
+     <li class="divider"></li>
+    </ul>
+
+    <ul class="left">
+     <li><a href="{% url 'about' %}">Om sidan</a></li>
+     <li class="divider"></li>
+    </ul>
+
+    <ul class="right">
+     <li class="divider"></li>
+
+     {% if user.is_authenticated %}
+     <li class="has-dropdown">
+      <a href="">{% if user.member %}{{ user.member }}{% else %}{{ user }}{% endif %}</a>
+      <ul class="dropdown">
+       {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">Admin</a></li>{% endif %}
+       <li><a href="{% url 'password_change' %}">Byt lösenord</a></li>
+       <li><a href="{% url 'logout' %}">Logga ut</a></li>
+      </ul>
+     </li>
+     {% else %}
+     <li class="has-form">
+     <a href="{% url 'login' %}" class="button">Logga in</a></li>
+     {% endif %}
+    </ul>
+
+    </section>
+    </nav>
+
+    {# Main content goes here #}
+    <div class="row">
+    <div class="text-center"><br><h1>{% block body_title %}{% endblock body_title %}</h1></div><br>
+    <div class="small-12 columns">{% block base_body %}{% endblock base_body %}</div>
+    </div>
+
+    {# Override if you need another version of jQuery #}
+    {% block foundation_jquery %}
+    {% foundation_vendor "jquery" %}
+    {% endblock foundation_jquery %}
+
+    {# Foundation JS #}
+    {% block foundation_js %}
+    {% foundation_js %}
+    {% endblock foundation_js %}
+
+    {# Custom JS #}
+    {% block body_js %}{% endblock body_js %}
+
+    {# Init Foundation #}
+    {% block foundation_js_init %}
+    <script>
+        $(document).foundation();
+    </script>
+    {% endblock foundation_js_init %}
+</body>
+</html>

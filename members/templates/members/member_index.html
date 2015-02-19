@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block body_title %}Bli medlem i Lokan!{% endblock %}
+
+{% block base_body %}
+<div class="small-6 small-centered columns">
+
+Medlemsavgiften för {{ settings.BUSINESS_YEAR }} är <strong>{{ settings.MEMBERSHIP_FEE }} kr</strong> och sätts in på:<br>
+
+<strong>PG 304109-2</strong><br>
+
+Glöm inte att skriva ditt namn och "Medlemsavgift {{ settings.BUSINESS_YEAR }}".
+
+<hr>
+<ul class="pricing-table">
+  <li class="title">Medlemskap {{ settings.BUSINESS_YEAR }}</li>
+  <li class="price">{{ settings.MEMBERSHIP_FEE }} kr</li>
+  <li class="description">Vad väntar du på?</li>
+  <li class="bullet-item">Sök projektbidrag</li>
+  <li class="bullet-item">Var med på roliga aktiviteter</li>
+  <li class="bullet-item">Full tillgång till hemsidan</li>
+  <li class="cta-button"><a class="button" href="">Bli medlem nu!</a></li>
+</ul>
+
+</div>
+{% endblock %}

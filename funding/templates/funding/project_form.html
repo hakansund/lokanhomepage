@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block body_title %}Ansökan om projektbidrag{% endblock body_title %}
+
+{% block base_body %}
+ <div class="small-6 small-centered columns">
+<form action="" method="post">{% csrf_token %}
+    {{ form }}
+    <hr>OBS! Du måste kunna styrka utgifterna med kvitto!<hr>
+    <input type="submit" value="Ansök"  class="button expand"/>
+</form>
+</div>
+{% endblock base_body %}

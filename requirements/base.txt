@@ -1,0 +1,8 @@
+Django==1.7.4
+django-model-utils==2.2
+django-settings-export==1.0.3
+django-zurb-foundation==5.4.7.1
+psycopg2==2.6
+PyYAML==3.11
+Unipath==1.1
+yamjam==0.1.7

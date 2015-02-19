@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'jquery-ui.min.css' %}"/>
+{% endblock css %}
+
+{% block body_title %}Rösta för projekt "{{ project.title }}"{% endblock %}
+
+{% block base_body %}
+<div class="small-6 small-centered columns">
+
+<p>
+<strong>Ansökare:</strong> {{ project.applier }}<br>
+<strong>Titel:</strong> {{ project.title }}<br>
+<strong>Beskrivning:</strong> {{ project.description }}<br>
+<strong>Summa:</strong> {{ project.amount }}<br>
+<strong>Verksamhetsår:</strong> {{ project.year }}
+</p>
+
+<hr>
+
+<form action="" method="post">{% csrf_token %}
+<div id="radioset">
+{% for choice in form.positive.field.choices %}
+
+    <input type="radio" name="positive" value="{{choice.0}}" id="radio{{choice.0}}"/>
+    <label for="radio{{choice.0}}">{{choice.1}}</label>
+
+{% endfor %}
+</div><hr>
+<input type="submit" value="Rösta" class="button expand"/>
+</form>
+
+</div>
+{% endblock base_body %}
+
+{% block body_js %}
+<script src="{% static 'jquery-ui.min.js' %}"></script>
+
+<script>
+$( "#radioset" ).buttonset();
+</script>
+
+{% endblock body_js %}

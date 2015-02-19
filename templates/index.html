@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block body_title %}Välkommen till Lokans hemsida!{% endblock %}
+
+{% block base_body %}
+ <p class="text-center">
+ <img src="{% static "images/logotype.jpg" %}" alt="Lokan logotype." />
+ </p>
+
+ <p class="text-center">
+ Logga in för full funktionalitet. Användarkonto utdelas av styrelsen.
+ </p>
+
+{% endblock %}

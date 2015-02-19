@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block body_title %}
+Lista över {% if upcoming %}kommande{% else %}gamla{% endif %} aktiviteter {{ settings.BUSINESS_YEAR }}
+{% endblock body_title%}
+
+{% block base_body %}
+<p>
+<table class="small-12 small-centered columns">
+  <thead>
+    <tr>
+     <th>När</th>
+     {% if upcoming %}<th>Tid kvar</th>{% endif %}
+     <th>Vad</th>
+     <th>Var</th>
+     <th>Hur</th>
+     <th>Arrangör</th>
+     {% if upcoming %}<th>Administrera</th>{% endif %}
+    </tr>
+  </thead>
+  <tbody>
+{% for activity in activity_list %}
+    <tr>
+      <td>{{ activity.datetime|date:"D j F"|capfirst }},
+      kl. {{ activity.datetime|time:"H:i" }}</td>
+      {% if upcoming %}<td>{{ activity.datetime|timeuntil }}</td>{% endif %}
+      <td>{{ activity.activity }}</td>
+      <td>{{ activity.place }}</td>
+      <td>{{ activity.notes }}</td>
+      <td>{{ activity.created_by }}</td>
+      {% if upcoming %}
+       <td>{% if user == activity.created_by %}
+       <a href="{% url 'activities:edit' activity.id %}">
+       <span class="label">Ändra</span></a>
+       {% endif %}
+       </td>
+      {% endif %}
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+
+{% endblock base_body %}

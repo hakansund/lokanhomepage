@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'jquery.datetimepicker.css' %}"/>
+{% endblock css %}
+
+{% block body_title %}
+ {% if activity.id %}Uppdatera{% else %}Skapa{% endif %} aktivitet
+{% endblock body_title %}
+
+{% block base_body %}
+ <div class="small-6 small-centered columns">
+  <form action="" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="{% if activity.id %}Uppdatera{% else %}Skapa{% endif %}" class="button expand"/>
+  </form>
+ </div>
+{% endblock base_body %}
+
+
+{% block body_js %}
+<script src="{% static 'jquery.datetimepicker.js' %}"></script>
+
+<script type="text/javascript">
+  $(function() {
+    $(" #id_datetime ").datetimepicker({format:"Y-m-d H:i",lang:"sv", dayOfWeekStart:1});
+  });
+</script>
+
+{% endblock body_js %}
