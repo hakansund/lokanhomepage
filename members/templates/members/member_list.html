@@ -7,7 +7,6 @@
 <table class="small-6 small-centered columns">
   <thead>
     <tr>
-     <th>Nr</th>
      <th>Namn</th>
      <th>Styrelseposition</th>
     </tr>
@@ -15,7 +14,6 @@
   <tbody>
 {% for member in member_list %}
     <tr>
-      <td>{{ member.id }}</td>
       <td>{{ member }}</td>
       <td>{% if member.boardmember_set.all.0.title %} {{ member.boardmember_set.all.0.title }}{% else %}-{% endif %}</td>
     </tr>
@@ -23,4 +21,7 @@
   </tbody>
 </table>
 
+<p class="text-center">
+Totalt antal medlemmar: {{ member_list|length }}
+</p>
 {% endblock base_body %}
