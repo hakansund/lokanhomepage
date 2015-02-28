@@ -25,6 +25,7 @@ BASIC_INSTALLED_APPS = (
     'activities',
     'foundation',
     'funding',
+    'notifications'
 )
 
 EXTRA_INSTALLED_APPS = tuple(yamjam()['lokanhomepage']['extra_installed_apps'])
@@ -82,6 +83,18 @@ TEMPLATE_DIRS = BASE_DIR.child('templates'),
 STATICFILES_DIRS = BASE_DIR.child('static'),
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
+
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = yamjam()['lokanhomepage']['gmail']['user']
+EMAIL_HOST_PASSWORD = yamjam()['lokanhomepage']['gmail']['password']
 
 # Unique for lokan.org
 BUSINESS_YEAR = 2014

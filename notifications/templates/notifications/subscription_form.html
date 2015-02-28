@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_title %}
+ Notifikationer
+{% endblock body_title %}
+
+{% block base_body %}
+<div class="small-6 small-centered columns">
+{% if user.email %}
+<form action="" method="post">
+{% csrf_token %}
+ <table class="small-6 small-centered columns">
+  <tbody>
+    {% for field in form %}
+    <tr>
+      <td>{{ field.label_tag }}</td>
+      <td>
+      <div class="switch">{{ field.errors }}
+        {{ field }} {{ field.label_tag }}
+      </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+<div class="small-4 small-centered columns">
+  <input type="submit" value="Uppdatera" class="button expand"/>
+</form>
+{% else %}
+Du har inte registrerat någon mailadress! Kontakta styrelsen.
+</div>
+{% endif %}
+{% endblock base_body %}

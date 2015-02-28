@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^activities/', include('activities.urls', namespace='activities')),
     url(r'^members/', include('members.urls', namespace='members')),
     url(r'^funding/', include('funding.urls', namespace='funding')),
+    url(r'^notifications/', include('notifications.urls', namespace='notifications')),
     # Other
     url(r'^admin/', include(admin.site.urls)),
     url(r'^about/', views.AboutView.as_view(), name='about'),

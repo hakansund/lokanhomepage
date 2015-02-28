@@ -3,6 +3,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from django.utils import timezone
 
 from .models import Activity
+from notifications.tasks import notify
 from lokanhomepage.mixins import LoginRequiredMixin
 
 
@@ -34,6 +35,7 @@ class CreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
+        notify.delay('activities')
         return super(CreateView, self).form_valid(form)
 
 

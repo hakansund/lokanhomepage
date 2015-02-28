@@ -88,6 +88,7 @@
       <a href="">{% if user.member %}{{ user.member }}{% else %}{{ user }}{% endif %}</a>
       <ul class="dropdown">
        {% if user.is_staff %}<li><a href="{% url 'admin:index' %}">Admin</a></li>{% endif %}
+       <li><a href="{% url 'notifications:index' %}">Notifikationer</a></li>
        <li><a href="{% url 'password_change' %}">Byt lösenord</a></li>
        <li><a href="{% url 'logout' %}">Logga ut</a></li>
       </ul>

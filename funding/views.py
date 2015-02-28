@@ -2,6 +2,7 @@ from django.views.generic import ListView, CreateView
 from django.conf import settings
 from .models import Project, Vote
 from lokanhomepage.mixins import LoginRequiredMixin, MayVoteMixin
+from notifications.tasks import notify
 from .forms import VoteForm
 from members.models import Member
 
@@ -26,6 +27,7 @@ class CreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         form.instance.year = settings.BUSINESS_YEAR
+        notify.delay('funding')
         return super(CreateView, self).form_valid(form)
 
 
