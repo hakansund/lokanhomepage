@@ -97,5 +97,5 @@ EMAIL_HOST_USER = yamjam()['lokanhomepage']['gmail']['user']
 EMAIL_HOST_PASSWORD = yamjam()['lokanhomepage']['gmail']['password']
 
 # Unique for lokan.org
-BUSINESS_YEAR = 2014
+BUSINESS_YEAR = 2015
 MEMBERSHIP_FEE = 100
