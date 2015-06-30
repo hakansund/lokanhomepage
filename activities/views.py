@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from .models import Activity
 from notifications.tasks import notify
-from lokanhomepage.mixins import LoginRequiredMixin
+from braces.views import LoginRequiredMixin
 
 
 class ListUpcomingView(ListView):

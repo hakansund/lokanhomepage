@@ -25,7 +25,8 @@ BASIC_INSTALLED_APPS = (
     'activities',
     'foundation',
     'funding',
-    'notifications'
+    'notifications',
+    'braces',
 )
 
 EXTRA_INSTALLED_APPS = tuple(yamjam()['lokanhomepage']['extra_installed_apps'])

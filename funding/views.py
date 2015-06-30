@@ -1,7 +1,8 @@
 from django.views.generic import ListView, CreateView
 from django.conf import settings
 from .models import Project, Vote
-from lokanhomepage.mixins import LoginRequiredMixin, MayVoteMixin
+from braces.views import LoginRequiredMixin
+from lokanhomepage.mixins import MayVoteMixin
 from notifications.tasks import notify
 from .forms import VoteForm
 from members.models import Member

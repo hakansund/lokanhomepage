@@ -1,7 +1,7 @@
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse_lazy
 from django.db import IntegrityError
-from lokanhomepage.mixins import LoginRequiredMixin
+from braces.views import LoginRequiredMixin
 from .models import Subscription, EVENTS
 from .forms import SubscriptionForm
 

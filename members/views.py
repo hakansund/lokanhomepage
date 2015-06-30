@@ -1,7 +1,7 @@
 from django.views.generic import ListView, TemplateView
 from django.conf import settings
 from .models import Member
-from lokanhomepage.mixins import LoginRequiredMixin
+from braces.views import LoginRequiredMixin
 
 
 class IndexView(TemplateView):
