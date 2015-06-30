@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^notifications/', include('notifications.urls', namespace='notifications')),
     # Other
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/defender/', include('defender.urls')),
     url(r'^about/', views.AboutView.as_view(), name='about'),
     url(r'^$', views.IndexView.as_view(), name='index'),
 )
