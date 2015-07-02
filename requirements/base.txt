@@ -4,6 +4,7 @@ billiard
 celery
 Django
 django-braces
+django-defender
 django-model-utils
 django-settings-export
 django-zurb-foundation==5.4.7.1
