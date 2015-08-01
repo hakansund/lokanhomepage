@@ -1,17 +1,21 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from xvfbwrapper import Xvfb
 from django.contrib.auth.models import User
 
 class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
+        self.xvfb = Xvfb(width=1024, height=768)
+        self.xvfb.start()
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3)
         self.user = User.objects.create_user('kalle', 'email@email.com', 'password')
 
     def tearDown(self):
         self.browser.quit()
+        self.xvfb.stop()
 
     def test_start_page_layout(self):
 
