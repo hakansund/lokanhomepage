@@ -10,9 +10,12 @@ django-settings-export
 django-zurb-foundation==5.4.7.1
 kombu
 psycopg2
+pytest-django
 pytz
 PyYAML
 redis
+selenium
 six
 Unipath
+xvfbwrapper
 yamjam
