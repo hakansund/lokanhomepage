@@ -1,0 +1,18 @@
+allowed_hosts: ['*',]
+app_name: lokanhomepage
+code_dir: /vagrant
+db_engine: "django.db.backends.postgresql_psycopg2"
+db_host: ""
+db_name: "{{ app_name }}"
+db_port: 5432
+db_password: "vagrant"
+db_user: "vagrant"
+debug: True
+extra_installed_apps: []
+extra_middleware_classes: []
+gmail_password: ""
+gmail_user: ""
+req_path: "/vagrant/requirements/dev.txt"
+secret_key: 'x)1209oq@i%!=0)tb2lsw=!6&mn&7956tj71gn0dygz1@)dc*q'
+template_debug: True
+venv_dir: /vagrant/virtualenv

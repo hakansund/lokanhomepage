@@ -1,0 +1,62 @@
+---
+- name: update system
+  apt: update_cache=yes upgrade=dist
+
+- name: ensure postgresql is installed
+  apt: name={{ item }}
+  with_items:
+    - postgresql
+    - libpq-dev
+    - python-psycopg2
+    - python3-psycopg2
+
+- name: create postgres database
+  postgresql_db: name="{{ app_name }}"
+  become_user: postgres
+
+- name: create postgres user
+  postgresql_user:
+    db: "{{ app_name }}"
+    name: "vagrant"
+    password: "vagrant"
+  become_user: postgres
+
+- name: ensure python-dev and python-virtualenv is installed
+  apt: name={{ item }}
+  with_items:
+    - python3-dev
+    - python-virtualenv
+- name: create virtual environment
+  command: virtualenv {{ venv_dir }} -p python3
+  args:
+    creates: "{{ venv_dir }}"
+
+- name: install requirements
+  pip: requirements="{{ req_path }}" virtualenv="{{ venv_dir }}"
+
+- name: create yamjam config
+  template: src=config.yaml.j2 dest=/vagrant/config.yaml
+
+- name: ensure nginx is installed
+  apt: name=nginx
+
+- name: create nginx config
+  template: src=nginx.j2 dest="/etc/nginx/sites-available/{{ app_name }}"
+
+- name: enable nginx config
+  file:
+    path: "/etc/nginx/sites-enabled/{{ app_name }}"
+    src: "/etc/nginx/sites-available/{{ app_name }}"
+    state: link
+
+- name: remove default nginx config
+  file: path="/etc/nginx/sites-enabled/default" state=absent
+
+- name: reload and enable nginx
+  service: name=nginx state=reloaded enabled=yes
+
+- name: ensure xvfb is installed
+  apt: name=xvfb
+
+- name: ensure firefox is installed
+  apt: name=firefox

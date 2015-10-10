@@ -1,0 +1,17 @@
+server {
+    listen 80;
+    server_name _;
+
+    access_log /var/log/nginx/lokanhomepage.access.log;
+    error_log /var/log/nginx/lokanhomepage.error.log;
+
+    #location = /favicon.ico { access_log off; log_not_found off; }
+    #location /static/ {
+    #    root /home/user/myproject;
+    #}
+
+    location / {
+        include proxy_params;
+        proxy_pass http://localhost:8000;
+    }
+}

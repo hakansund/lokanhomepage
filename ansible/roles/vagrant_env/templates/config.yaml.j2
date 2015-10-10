@@ -1,0 +1,17 @@
+lokanhomepage:
+    secret_key: {{ secret_key }}
+    debug: {{ debug }}
+    template_debug: {{ template_debug }}
+    allowed_hosts: {{ allowed_hosts }}
+    extra_installed_apps: {{ extra_installed_apps }}
+    extra_middleware_classes: {{ extra_middleware_classes }}
+    database:
+        engine: {{ db_engine }}
+        name: {{ db_name }}
+        user: {{ db_user }}
+        password: {{ db_password }}
+        host: {{ db_host }}
+        port: {{ db_port }}
+    gmail:
+        user: {{ gmail_user }}
+        password: {{ gmail_password }}
