@@ -8,8 +8,10 @@
  <img src="{% static "images/logotype.jpg" %}" alt="Lokan logotype." />
  </p>
 
+ {% if not user.is_authenticated %}
  <p class="text-center">
  Logga in för full funktionalitet. Användarkonto utdelas av styrelsen.
  </p>
+ {% endif %}
 
 {% endblock %}
