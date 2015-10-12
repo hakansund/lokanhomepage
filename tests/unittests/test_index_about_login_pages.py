@@ -1,35 +1,31 @@
 import pytest
-from django.contrib.auth.models import User
 
-def create_user(username='username', email='email@email.com', password='password'):
-    return User.objects.create_user(username, email,  password)
+username='username'
+password='password'
 
-def test_index_page(client):
-    response = client.get('/')
+response_url = '/'
+def test_index_page(client, response):
     assert response.status_code == 200
 
-def test_about_page(client):
-    response = client.get('/about/')
+response = '/about/'
+def test_about_page(client, response):
     assert response.status_code == 200
 
-def test_login_page(client):
-    response = client.get('/login/')
+response = '/login/'
+def test_login_page(client, response):
     assert response.status_code == 200
 
 @pytest.mark.django_db
-def test_login_nonuser(client):
-    user = create_user()
-    response = client.login(username='Kalle', password='')
+def test_login_nonuser(client, authorized_user):
+    response = client.login(username='Kalle', password='_')
     assert response is False
 
 @pytest.mark.django_db
-def test_login_wrong_password(client):
-    user = create_user()
-    response = client.login(username='username', password='wrongpass')
+def test_login_wrong_password(client, authorized_user):
+    response = client.login(username=username, password='wrongpass')
     assert response is False
 
 @pytest.mark.django_db
-def test_login_user(client):
-    user = create_user()
-    response = client.login(username='username', password='password')
+def test_login_user(client, authorized_user):
+    response = client.login(username=username, password=password)
     assert response is True
