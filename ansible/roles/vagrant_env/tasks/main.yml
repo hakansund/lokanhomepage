@@ -57,6 +57,12 @@
 - name: reload and enable nginx
   service: name=nginx state=reloaded enabled=yes
 
+- name: ensure redis is installed
+  apt: name=redis
+
+- name: start and enable redis
+  service: name=redis-server status=started enabled=yes
+
 - name: ensure xvfb is installed
   apt: name=xvfb
 
