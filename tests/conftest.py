@@ -1,5 +1,6 @@
 import pytest
-# from model_mommy import mommy
+from datetime import datetime, timedelta
+from model_mommy import mommy
 from selenium.webdriver import Firefox
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
@@ -42,3 +43,13 @@ def authorized_user(django_user_model, request):
     return django_user_model.objects.create_user(
         username=getattr(request.module, 'username', 'username'),
         password=getattr(request.module, 'password', 'password'))
+
+
+@pytest.fixture()
+def old_activity():
+    return mommy.make('Activity', datetime=(datetime.now()-timedelta(days=3)))
+
+
+@pytest.fixture()
+def upcoming_activity():
+    return mommy.make('Activity', datetime=(datetime.now()+timedelta(days=3)))
