@@ -23,16 +23,14 @@ def test_activities_create_as_anonymous_user(anonymous_response):
 
 
 @pytest.mark.django_db()
-def test_activities_create_incomplete(client, authorized_user):
-    client.login(username='username', password='password')
-    response = client.post(response_url, {})
+def test_activities_create_incomplete(authorized_client, authorized_user):
+    response = authorized_client.post(response_url, {})
     assert response.status_code == 200
 
 
 @pytest.mark.django_db()
-def test_activities_create_complete(client, authorized_user):
-    client.login(username='username', password='password')
+def test_activities_create_complete(authorized_client, authorized_user):
     data = {'datetime': datetime.datetime.now(), 'place': 'place',
             'activity': 'activity', 'notes': 'notes'}
-    response = client.post(response_url, data)
+    response = authorized_client.post(response_url, data)
     assert response.status_code == 302

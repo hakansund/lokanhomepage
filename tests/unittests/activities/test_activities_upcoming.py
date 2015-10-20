@@ -18,5 +18,6 @@ def test_activities_upcoming_content(response):
 
 
 @pytest.mark.django_db
-def test_activities_upcoming_content_with_activity(upcoming_activity, response):
+def test_activities_upcoming_content_with_activity(
+        upcoming_activity, response):
     assert upcoming_activity.activity in response.content.decode('utf-8')

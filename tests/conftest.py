@@ -53,3 +53,9 @@ def old_activity():
 @pytest.fixture()
 def upcoming_activity():
     return mommy.make('Activity', datetime=(datetime.now()+timedelta(days=3)))
+
+
+@pytest.fixture()
+def authorized_client(client, authorized_user):
+    client.login(username='username', password='password')
+    return client

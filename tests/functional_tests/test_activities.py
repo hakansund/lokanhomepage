@@ -4,7 +4,7 @@ username = 'kalle'
 password = 'fantasy'
 
 
-def test_add_activity(
+def test_activities(
         browser, live_server, authorized_user, action_chains, keys):
     # Kalle is planning a board game night, so he enters lokan.org.
     browser.get(live_server.url)
@@ -32,12 +32,10 @@ def test_add_activity(
     activitybox.send_keys('Brädspel')
     notesbox.send_keys('BYOB')
     browser.find_element_by_xpath('//input[@type="submit"]').click()
-    body_text = browser.find_element_by_tag_name('body').text
-    assert 'Lista över kommande aktiviteter' in body_text
-    # And sees a list of upcoming activities.
+    # And voila! The event is now in the list of upcoming activities.
     body_text = browser.find_element_by_tag_name('body').text
     assert 'Lista över kommande aktiviteter' in body_text
     # Kalle sees that there is an upcoming RPG-night in three days. Awesome!
 
     # "When was the last board game night?" He clicks on 'Gamla Aktiviteter'.
-    assert 0
+    assert 0, 'Finish test!'
