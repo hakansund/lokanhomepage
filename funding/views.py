@@ -6,6 +6,7 @@ from lokanhomepage.mixins import MayVoteMixin
 from notifications.tasks import notify
 from .forms import VoteForm
 from members.models import Member
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
 class ListView(LoginRequiredMixin, ListView):
@@ -32,9 +33,10 @@ class CreateView(LoginRequiredMixin, CreateView):
         return super(CreateView, self).form_valid(form)
 
 
-class VoteView(MayVoteMixin, CreateView):
+class VoteView(PermissionRequiredMixin, CreateView):
     model = Vote
     form_class = VoteForm
+    permission_required = 'funding.can_vote'
 
     def get_context_data(self, **kwargs):
         context = super(VoteView, self).get_context_data(**kwargs)

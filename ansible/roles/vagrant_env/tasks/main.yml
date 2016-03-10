@@ -34,7 +34,7 @@
     creates: "{{ venv_dir }}"
 
 - name: install requirements
-  pip: requirements="{{ req_path }}" virtualenv="{{ venv_dir }}"
+  pip: requirements="{{ req_path }}" virtualenv="{{ venv_dir }}" state=latest
 
 - name: create yamjam config
   template: src=config.yaml.j2 dest=/vagrant/config.yaml

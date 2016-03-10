@@ -5,7 +5,7 @@ from django.contrib import admin
 from . import views
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Authentication
     url(r'^login/', 'django.contrib.auth.views.login', name='login'),
     url(r'^logout/', 'django.contrib.auth.views.logout', name='logout'),
@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^notifications/', include('notifications.urls', namespace='notifications')),
     # Other
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/defender/', include('defender.urls')),
+    #url(r'^admin/defender/', include('defender.urls')),
     url(r'^about/', views.AboutView.as_view(), name='about'),
     url(r'^$', views.IndexView.as_view(), name='index'),
-)
+]
