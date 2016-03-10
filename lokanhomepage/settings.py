@@ -10,7 +10,7 @@ from YamJam import yamjam
 SECRET_KEY = yamjam()['lokanhomepage']['secret_key']
 
 DEBUG = yamjam()['lokanhomepage']['debug']
-TEMPLATE_DEBUG = yamjam()['lokanhomepage']['template_debug']
+#TEMPLATE_DEBUG = yamjam()['lokanhomepage']['template_debug']
 
 ALLOWED_HOSTS = yamjam()['lokanhomepage']['allowed_hosts']
 
@@ -47,8 +47,33 @@ EXTRA_MIDDLEWARE_CLASSES = tuple(
 
 MIDDLEWARE_CLASSES = BASIC_MIDDLEWARE_CLASSES + EXTRA_MIDDLEWARE_CLASSES
 
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
-    'django_settings_export.settings_export',)
+TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
+    'django_settings_export.settings_export', ]
+
+BASE_DIR = Path(__file__).ancestor(2)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            BASE_DIR.child('templates'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+     },
+ ]
+
 
 SETTINGS_EXPORT = ['BUSINESS_YEAR', 'MEMBERSHIP_FEE']
 
@@ -80,7 +105,6 @@ MEDIA_ROOT = BASE_DIR.child('media')
 MEDIA_URL = '/media/'
 STATIC_ROOT = '/var/www/static/'
 STATIC_URL = '/static/'
-TEMPLATE_DIRS = BASE_DIR.child('templates'),
 STATICFILES_DIRS = BASE_DIR.child('static'),
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
