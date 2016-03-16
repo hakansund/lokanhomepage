@@ -1,7 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from . import views
+from .views import FormView
 
-urlpatterns = patterns('',
-    url(r'^$', views.FormView.as_view(), name='index'),
-)
+urlpatterns = [
+    url(r'^$', FormView.as_view(), name='index'),
+]

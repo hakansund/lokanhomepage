@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+from django.contrib.auth.views import *
 from django.contrib import admin
 
 from . import views
@@ -7,12 +7,10 @@ admin.autodiscover()
 
 urlpatterns = [
     # Authentication
-    url(r'^login/', 'django.contrib.auth.views.login', name='login'),
-    url(r'^logout/', 'django.contrib.auth.views.logout', name='logout'),
-    url(r'^password_change/', 'django.contrib.auth.views.password_change',
-         name='password_change'),
-    url(r'^password_change_done/',
-        'django.contrib.auth.views.password_change_done',
+    url(r'^login/', login, name='login'),
+    url(r'^logout/', logout, name='logout'),
+    url(r'^password_change/', password_change, name='password_change'),
+    url(r'^password_change_done/', password_change_done,
         name='password_change_done'),
     # Apps
     url(r'^activities/', include('activities.urls', namespace='activities')),
