@@ -3,14 +3,12 @@ Django settings for lokanhomepage project.
 
 """
 
-from django.conf import global_settings
 from unipath import Path
 from YamJam import yamjam
 
 SECRET_KEY = yamjam()['lokanhomepage']['secret_key']
 
 DEBUG = yamjam()['lokanhomepage']['debug']
-#TEMPLATE_DEBUG = yamjam()['lokanhomepage']['template_debug']
 
 ALLOWED_HOSTS = yamjam()['lokanhomepage']['allowed_hosts']
 
@@ -47,9 +45,6 @@ EXTRA_MIDDLEWARE_CLASSES = tuple(
 
 MIDDLEWARE_CLASSES = BASIC_MIDDLEWARE_CLASSES + EXTRA_MIDDLEWARE_CLASSES
 
-TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + [
-    'django_settings_export.settings_export', ]
-
 BASE_DIR = Path(__file__).ancestor(2)
 TEMPLATES = [
     {
@@ -69,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'django_settings_export.settings_export',
             ],
         },
      },
@@ -103,6 +99,11 @@ USE_TZ = True
 BASE_DIR = Path(__file__).ancestor(2)
 MEDIA_ROOT = BASE_DIR.child('media')
 MEDIA_URL = '/media/'
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+)
 STATIC_ROOT = '/var/www/static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = BASE_DIR.child('static'),

@@ -6,6 +6,7 @@ from model_utils.models import TimeStampedModel
 YEARS = (
         (2014, 2014),
         (2015, 2015),
+        (2016, 2016),
     )
 
 
